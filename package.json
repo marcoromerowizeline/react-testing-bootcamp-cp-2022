@@ -5,7 +5,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^14.1.1",
+    "axios": "^0.27.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.0",
@@ -36,6 +36,11 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.14.0"
+    "@testing-library/user-event": "^14.1.1",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "msw": "^0.39.2",
+    "prettier": "^2.6.2"
   }
 }

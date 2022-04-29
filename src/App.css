@@ -13,9 +13,9 @@
   }
 }
 
-.App-header {
+.App-header, .App-footer {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +24,10 @@
   color: white;
 }
 
+.main-section {
+  min-height: 70vh;
+
+}
 .App-link {
   color: #61dafb;
 }
@@ -35,4 +39,67 @@
   to {
     transform: rotate(360deg);
   }
+}
+/* some useful styles */
+form {
+  background: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  display: flex;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+input {
+  padding: 10px 12px;
+  border-radius: 5px;
+  margin-right: 8px;
+  border: 2px solid #444;
+}
+
+button[type="submit"] {
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  border: 2px solid #444;
+  background: #0b71f1;
+  color: white;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #2f86f3;
+}
+
+button[type="submit"]:disabled {
+  background: #61a3f5;
+}
+
+img {
+  max-width: 50ch;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.border-red {
+  border: solid 1px salmon;
+}
+
+.border-green {
+  border: solid 1px greenyellow;
+}
+
+.image-container {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 50%;
+}
+
+.description-container {
+  padding: 60px 30px 0 30px;
+  width: 50%;
 }
