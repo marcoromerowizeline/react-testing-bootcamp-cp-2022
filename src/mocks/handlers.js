@@ -1,10 +1,10 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { baseURL } from '../config';
+import { apiUrl } from '../config';
 
 export const handlers = [
   // Handles a NASA API like GET request (with no additional params)
-  rest.get(`${baseURL}`, (req, res, ctx) => {
+  rest.get(`${apiUrl}`, (req, res, ctx) => {
     // const api_key = req.url.searchParams.get('api_key');
     // const date = req.url.searchParams.get('date');
     return res(ctx.status(200),

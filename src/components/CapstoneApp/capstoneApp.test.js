@@ -1,10 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CapstoneApp } from '.';
 
 // Arrange
 const setup = () => { render(<CapstoneApp/>) };
-
+const getShowButton = () => screen.getByRole('button', { name: /show/i })
 describe('Render correctly the header, footer and main content in the app.', () => {
   it('Renders the Capstone App Component', () => {
     setup();
@@ -53,13 +53,22 @@ describe('Acceptance Criteria.', () => {
 
     const dateInputElement = screen.getByLabelText('image-date-input');
     const showButtonElement = screen.getByRole('button', { name: /show/i });
+
     expect(showButtonElement).toBeInTheDocument();  // button is present
-    // screen.debug(dateInputElement);
-    userEvent.type(dateInputElement, '2022-04-28');
-    userEvent.click(showButtonElement);
+    /** TO DO: Check this issue */
+    // userEvent.type doesn't work the the same way with date inputs (next line)
+    // userEvent.type(dateInputElement, { target: { value: '2022-04-28' } });
+    // userEvent.type(dateInputElement, '2022-04-28');
+    /** End of issue */
+
+    fireEvent.change(dateInputElement, { target: { value: '2022-04-04' } });
+    await userEvent.click(showButtonElement);
+
     await waitFor(() => {
-      expect(screen.getByRole('img')).toBeInTheDocument();
+      expect(screen.getByText(/2022-04-04/)).toBeInTheDocument();
+      // expect(screen.getByText(/A Vortex Aurora over Iceland/i)).toBeInTheDocument(); // image of the day 2022-04-04
     });
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
   // Use msw
   it('When the app fetches the API, and there is an unexpected error, the app should show a message: "There was an error, please try again."', () => {
@@ -70,18 +79,17 @@ describe('Acceptance Criteria.', () => {
     setup();
 
     const dateInputElement = screen.getByLabelText('image-date-input');
-    const showButtonElement = screen.getByRole('button', { name: /show/i });
-    // screen.debug(dateInputElement);
-    // await userEvent.type(dateInputElement, '2022-04-30'); // an incorrect date
-    userEvent.type(dateInputElement, '2022-04-30'); // an incorrect date
-    userEvent.click(showButtonElement);
-    // screen.debug(dateInputElement);
-    expect(screen.getByLabelText('image-date-input')).toHaveValue('2022-04-30');
+    const showButtonElement = getShowButton();
+    // test an incorrect date
+    fireEvent.change(dateInputElement, { target: { value: '2022-05-24' } });
+    await userEvent.click(showButtonElement);
     
     await waitFor(() => {
-      expect(screen.getByText('Date must be between Jun 16, 1995 and Apr 29, 2022')).toBeInTheDocument();
+      // TO DO: From mocks handlers config -test as well-
+      // expect(screen.getByText(/Lyrid of the Lake/i)).toBeInTheDocument();
+      expect(screen.getByText(/Date must be between Jun 16, 1995 and/i)).toBeInTheDocument();
     });
+    
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
-  // it.todo('Render correctly the header, footer and main content in the app.');
-  // This last one is in the first test suite
 });
