@@ -14,7 +14,12 @@ export const DateForm = ({ setImageOfTheDay, setErrorMessage }) => {
       const { data: fetchedImage } = await getImage(date);
       setImageOfTheDay(fetchedImage);
     } catch (error) {
-      const serverErrorMsg = error.response.data.msg || error.response.data.error.message || `Error on submit section: ${error.message}`;
+      // console.error(error);
+      const serverErrorMsg = 
+      error.response.data?.msg ||
+        error.response.data?.message || // To handle the one from msw
+        error.response.data.error?.message ||
+        `There was an error, please try again.`;
       setErrorMessage(serverErrorMsg);
       setImageOfTheDay(null);
       // console.log(`Error on submit section: ${error.message}`)

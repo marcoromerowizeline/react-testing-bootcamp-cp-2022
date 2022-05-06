@@ -3,6 +3,7 @@ import { rest } from 'msw';
 import { apiUrl } from '../config';
 
 export const handlers = [
+  // Initial request handler, this one can be overridden by a runtime request handler
   // Handles a NASA API like GET request (with no additional params)
   rest.get(`${apiUrl}`, (req, res, ctx) => {
     // const api_key = req.url.searchParams.get('api_key');
@@ -15,7 +16,7 @@ export const handlers = [
         hdurl: "https://apod.nasa.gov/apod/image/2204/LyridoverChinaJeffDai.jpg",
         media_type: "image",
         service_version: "v1",
-        title: "Lyrid of the Lake",
+        title: "Lyrid of the Lake - MSW",
         url: "https://apod.nasa.gov/apod/image/2204/LyridoverChinaJeffDai1024.jpg",
       })
     );
