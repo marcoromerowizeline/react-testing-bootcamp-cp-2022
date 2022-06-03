@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    // "prettier",
+    // "eslint-config-prettier"
+  ],
+  // "plugins": ["prettier"],
+  "rules": {
+    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}]
+  }
+}
